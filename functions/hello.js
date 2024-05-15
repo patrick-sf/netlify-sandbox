@@ -1,5 +1,5 @@
 exports.handler = async (event) => {
-  return JSON.stringify(Object.keys(event));
+  return JSON.stringify(JSON.parse(event.body));
   // const myHeaders = new Headers();
 
   // myHeaders.append("Content-Type", "application/json");
