@@ -1,11 +1,19 @@
 const crypto = require("crypto");
 
+const genericError = {
+  statusCode: 400,
+  body: "Oops! Something went wrong. Please try subscribing again.",
+};
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Function not found..." };
   }
 
   const params = JSON.parse(event.body);
+
+  if (!params.email_address) throw new Error();
+
   const isValidEmail = String(params.email_address)
     .toLowerCase()
     .match(
@@ -71,14 +79,8 @@ exports.handler = async (event) => {
           statusCode: 200,
           body: "Thank you for subscribing to our newsletter. You should receive a confirmation email soon.",
         }
-      : {
-          statusCode: 400,
-          body: "Oops! Something went wrong. Please try subscribing again.",
-        };
+      : genericError;
   } catch (err) {
-    return {
-      statusCode: 400,
-      body: "Oops! Something went wrong. Please try subscribing again.",
-    };
+    return genericError;
   }
 };
