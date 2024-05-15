@@ -1,4 +1,15 @@
 const crypto = require("crypto");
+const mailchimp = require("@mailchimp/mailchimp_marketing");
+
+mailchimp.setConfig({
+  apiKey: process.env.MAILCHIMP_API_KEY,
+  server: "us17",
+});
+
+async function callPing() {
+  const response = await mailchimp.ping.get();
+  console.log(response);
+}
 
 const genericHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,15 +36,18 @@ exports.handler = async (event) => {
   // const data = await response.json();
   if (event.httpMethod === "OPTIONS") {
     return {
-      statusCode: 200,
+      statusCode: 204,
       headers: genericHeaders,
       body: "Successful preflight call.",
     };
   }
+
+  const ping = await callPing();
   return {
     statusCode: 200,
     headers: genericHeaders,
-    body: `httpMethod: ${event.httpMethod}`,
+    body: `httpMethod: ${event.httpMethod} || 
+    ping: ${ping}`,
   };
   // if (event.httpMethod !== "POST") {
   //   return {
