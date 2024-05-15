@@ -1,3 +1,5 @@
+const crypto = require("crypto");
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Function not found..." };
@@ -21,9 +23,15 @@ exports.handler = async (event) => {
 
   const data = await response.json();
 
+  const hash = crypto
+    .createHash("md5")
+    .update(params.email_address)
+    .digest("hex");
+
   return {
     statusCode: 200,
-    body: `URL: ${process.env.MAILCHIMP_URL} ||
+    body: `hash: ${hash} || 
+    URL: ${process.env.MAILCHIMP_URL} ||
     USER: ${process.env.MAILCHIMP_USER} ||
     POST DATA: ${JSON.stringify(data)}`,
   };
