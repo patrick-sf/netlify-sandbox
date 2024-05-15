@@ -1,13 +1,23 @@
 const crypto = require("crypto");
 
+const genericHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "GET, POST, OPTION",
+};
 const genericError = {
   statusCode: 400,
+  headers: genericHeaders,
   body: "Oops! Something went wrong. Please try subscribing again.",
 };
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Function not found..." };
+    return {
+      statusCode: 405,
+      headers: genericHeaders,
+      body: "Function not found...",
+    };
   }
 
   const params = JSON.parse(event.body);
@@ -25,6 +35,7 @@ exports.handler = async (event) => {
   if (!isValidEmail) {
     return {
       statusCode: 403,
+      headers: genericHeaders,
       body: "Please enter a valid email address.",
     };
   }
@@ -56,10 +67,12 @@ exports.handler = async (event) => {
       return memberData.status === "pending"
         ? {
             statusCode: 409,
+            headers: genericHeaders,
             body: "Your subscription is almost complete! Please check your email and click the confirmation link.",
           }
         : {
             statusCode: 409,
+            headers: genericHeaders,
             body: "You are already subscribed to our newsletter.",
           };
     }
@@ -79,6 +92,7 @@ exports.handler = async (event) => {
     return data.status === "pending"
       ? {
           statusCode: 200,
+          headers: genericHeaders,
           body: "Thank you for subscribing to our newsletter. You should receive a confirmation email soon.",
         }
       : genericError;
