@@ -12,23 +12,22 @@ const genericError = {
 };
 
 exports.handler = async (event) => {
-  const response = await fetch(process.env.MAILCHIMP_URL, {
-    method: "post",
-    body: JSON.stringify({
-      ...params,
-      status: "pending",
-    }),
-    headers: myHeaders,
-    redirect: "follow",
-  });
+  // const response = await fetch(process.env.MAILCHIMP_URL, {
+  //   method: "post",
+  //   body: JSON.stringify({
+  //     ...params,
+  //     status: "pending",
+  //   }),
+  //   headers: myHeaders,
+  //   redirect: "follow",
+  // });
 
-  const data = await response.json();
+  // const data = await response.json();
 
   return {
     statusCode: 200,
     headers: genericHeaders,
-    body: `httpMethod: ${event.httpMethod} || 
-    data: ${data.status}`,
+    body: `httpMethod: ${event.httpMethod}`,
   };
   // if (event.httpMethod !== "POST") {
   //   return {
