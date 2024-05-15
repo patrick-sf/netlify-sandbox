@@ -15,7 +15,7 @@ exports.handler = async () => {
 
   const response = await fetch(process.env.MAILCHIMP_URL, {
     method: "post",
-    body: JSON.stringify(body),
+    body,
     headers: myHeaders,
     redirect: "follow",
   });
@@ -24,6 +24,8 @@ exports.handler = async () => {
 
   return {
     statusCode: 200,
-    body: `POST DATA: ${JSON.stringify(data)}`,
+    body: `URL: ${process.env.MAILCHIMP_URL} || 
+    USER: ${process.env.MAILCHIMP_USER} || 
+    POST DATA: ${JSON.stringify(data)}`,
   };
 };
