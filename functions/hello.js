@@ -10,13 +10,10 @@ exports.handler = async (event) => {
   });
   const data = await response.json();
 
-  console.log(data);
-
-  console.log(`POST DATA: ${data}`);
-
-  const subject = event.queryStringParameters.name || "World";
   return {
     statusCode: 200,
-    body: `Hello ${subject}!`,
+    body:
+      `url: ${process.env.MAILCHIMP_URL || "not found"} || ` +
+      `POST DATA: ${JSON.stringify(data)}`,
   };
 };
