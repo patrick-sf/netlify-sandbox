@@ -1,5 +1,6 @@
 exports.handler = async () => {
   try {
+    console.log(`url: ${process.env.MAILCHIMP_URL}`);
     const config = {
       method: "get",
       url: process.env.MAILCHIMP_URL,
