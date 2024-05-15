@@ -1,3 +1,5 @@
+import axios from "axios";
+
 exports.handler = async () => {
   try {
     console.log(`url: ${process.env.MAILCHIMP_URL}`);

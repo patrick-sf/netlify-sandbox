@@ -1,0 +1,14 @@
+{
+  "name": "netlify-sandbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "patrick-sf",
+  "license": "MIT",
+  "devDependencies": {
+    "netlify-lambda": "^1.4.3"
+  },
+  "scripts": {
+    "dev": "netlify-lambda serve functions",
+    "build": "netlify-lambda build functions"
+  }
+}
