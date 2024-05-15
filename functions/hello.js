@@ -1,19 +1,29 @@
-exports.handler = async (event) => {
-  console.log(`url: ${process.env.MAILCHIMP_URL || "not found"}`);
+exports.handler = async () => {
+  const myHeaders = new Headers();
 
-  const body = { a: 1 };
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
 
-  const response = await fetch("https://httpbin.org/post", {
+  const body = JSON.stringify({
+    email_address: process.env.MAILCHIMP_USER,
+    status: "pending",
+    merge_fields: {
+      FNAME: "Patrick",
+      LNAME: "Wu",
+    },
+  });
+
+  const response = await fetch(MAILCHIMP_URL, {
     method: "post",
     body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
+    headers: myHeaders,
+    redirect: "follow",
   });
+
   const data = await response.json();
 
   return {
     statusCode: 200,
-    body:
-      `url: ${process.env.MAILCHIMP_URL || "not found"} || ` +
-      `POST DATA: ${JSON.stringify(data)}`,
+    body: `POST DATA: ${JSON.stringify(data)}`,
   };
 };
