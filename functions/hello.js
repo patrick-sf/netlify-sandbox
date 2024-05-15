@@ -7,7 +7,7 @@ exports.handler = async (event) => {
 
   return {
     statusCode: 200,
-    body: `RESPONSE: ${params.email}`,
+    body: `RESPONSE: ${JSON.stringify(params)}`,
   };
 
   // const myHeaders = new Headers();
