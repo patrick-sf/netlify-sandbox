@@ -6,6 +6,7 @@ exports.handler = async (event) => {
   }
 
   const params = JSON.parse(event.body);
+  params.status = "pending";
 
   const myHeaders = new Headers();
 
