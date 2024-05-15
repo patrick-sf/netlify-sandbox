@@ -23,7 +23,13 @@ exports.handler = async (event) => {
   // });
 
   // const data = await response.json();
-
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: genericHeaders,
+      body: "Successful preflight call.",
+    };
+  }
   return {
     statusCode: 200,
     headers: genericHeaders,
