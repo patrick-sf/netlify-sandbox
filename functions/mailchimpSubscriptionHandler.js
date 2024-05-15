@@ -6,6 +6,19 @@ exports.handler = async (event) => {
   }
 
   const params = JSON.parse(event.body);
+  const isValidEmail = String(params.email_address)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+
+  if (!isValidEmail) {
+    return {
+      statusCode: 403,
+      body: "Please enter a valid email address.",
+    };
+  }
+
   const hash = crypto
     .createHash("md5")
     .update(params.email_address)
