@@ -5,7 +5,11 @@ exports.handler = async (event) => {
 
   const params = JSON.parse(event.body);
 
-  return `RESPONSE: ${params.email}`;
+  return {
+    statusCode: 200,
+    body: `RESPONSE: ${params.email}`,
+  };
+
   // const myHeaders = new Headers();
 
   // myHeaders.append("Content-Type", "application/json");
