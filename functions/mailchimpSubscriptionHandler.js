@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
 const genericHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "http://localhost:8000",
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Allow-Methods": "GET, POST, OPTION",
 };
