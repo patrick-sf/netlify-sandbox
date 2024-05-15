@@ -12,7 +12,9 @@ exports.handler = async (event) => {
 
   const params = JSON.parse(event.body);
 
-  if (!params.email_address) throw new Error();
+  if (!params.email_address) {
+    return genericError;
+  }
 
   const isValidEmail = String(params.email_address)
     .toLowerCase()
