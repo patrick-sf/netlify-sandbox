@@ -12,27 +12,61 @@ exports.handler = async (event) => {
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
 
-  const body = JSON.stringify(params);
-
-  const response = await fetch(process.env.MAILCHIMP_URL, {
-    method: "post",
-    body,
-    headers: myHeaders,
-    redirect: "follow",
-  });
-
-  const data = await response.json();
-
   const hash = crypto
     .createHash("md5")
     .update(params.email_address)
     .digest("hex");
 
-  return {
-    statusCode: 200,
-    body: `hash: ${hash} || 
-    URL: ${process.env.MAILCHIMP_URL} ||
-    USER: ${process.env.MAILCHIMP_USER} ||
-    POST DATA: ${JSON.stringify(data)}`,
-  };
+  try {
+    const memberDataResponse = await fetch(
+      `${process.env.MAILCHIMP_URL}/${hash}`,
+      {
+        method: "get",
+        headers: myHeaders,
+      }
+    );
+
+    const memberData = await memberDataResponse.json();
+
+    if (
+      (memberData && memberData.status === "pending") ||
+      memberData.status === "subscribed"
+    ) {
+      return memberData.status === "pending"
+        ? {
+            statusCode: 409,
+            body: "Your subscription is almost complete! Please check your email and click the confirmation link.",
+          }
+        : {
+            statusCode: 409,
+            body: "You are already subscribed to our newsletter.",
+          };
+    }
+
+    const body = JSON.stringify(params);
+
+    const response = await fetch(process.env.MAILCHIMP_URL, {
+      method: "post",
+      body,
+      headers: myHeaders,
+      redirect: "follow",
+    });
+
+    const data = await response.json();
+
+    return data.status === "pending"
+      ? {
+          statusCode: 200,
+          body: "Thank you for subscribing to our newsletter. You should receive a confirmation email soon.",
+        }
+      : {
+          statusCode: 400,
+          body: "Oops! Something went wrong. Please try subscribing again.",
+        };
+  } catch (err) {
+    return {
+      statusCode: 400,
+      body: "Oops! Something went wrong. Please try subscribing again.",
+    };
+  }
 };
