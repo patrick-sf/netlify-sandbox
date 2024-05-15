@@ -6,17 +6,14 @@ exports.handler = async (event) => {
   }
 
   const params = JSON.parse(event.body);
-  params.status = "pending";
-
-  const myHeaders = new Headers();
-
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
-
   const hash = crypto
     .createHash("md5")
     .update(params.email_address)
     .digest("hex");
+  const myHeaders = new Headers();
+
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
 
   try {
     const memberDataResponse = await fetch(
@@ -44,11 +41,12 @@ exports.handler = async (event) => {
           };
     }
 
-    const body = JSON.stringify(params);
-
     const response = await fetch(process.env.MAILCHIMP_URL, {
       method: "post",
-      body,
+      body: JSON.stringify({
+        ...params,
+        status: "pending",
+      }),
       headers: myHeaders,
       redirect: "follow",
     });
