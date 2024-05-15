@@ -13,7 +13,7 @@ exports.handler = async () => {
     },
   });
 
-  const response = await fetch(MAILCHIMP_URL, {
+  const response = await fetch(process.env.MAILCHIMP_URL, {
     method: "post",
     body: JSON.stringify(body),
     headers: myHeaders,
