@@ -1,11 +1,11 @@
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Function not found..." };
-  }
+  // if (event.httpMethod !== "POST") {
+  //   return { statusCode: 405, body: "Function not found..." };
+  // }
 
   const params = JSON.parse(event.body);
 
-  return `RESPONSE: ${JSON.stringify(Object.keys(params))}`;
+  return `RESPONSE: ${params.email}`;
   // const myHeaders = new Headers();
 
   // myHeaders.append("Content-Type", "application/json");
