@@ -28,7 +28,6 @@
 // };
 
 exports.handler = async (event) => {
-  console.log(`url: ${process.env.MAILCHIMP_URL || "not found"}`);
   const subject = event.queryStringParameters.name || "World";
   return {
     statusCode: 200,
