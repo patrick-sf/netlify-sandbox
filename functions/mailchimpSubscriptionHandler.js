@@ -27,83 +27,89 @@ exports.handler = async (event) => {
     };
   }
 
-  const params = JSON.parse(event.body);
+  return {
+    statusCode: 200,
+    headers: genericHeaders,
+    body: "Success",
+  };
 
-  if (!params.email_address) {
-    return genericError;
-  }
+  // const params = JSON.parse(event.body);
 
-  const isValidEmail = String(params.email_address)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+  // if (!params.email_address) {
+  //   return genericError;
+  // }
 
-  if (!isValidEmail) {
-    return {
-      statusCode: 403,
-      headers: genericHeaders,
-      body: "Please enter a valid email address.",
-    };
-  }
+  // const isValidEmail = String(params.email_address)
+  //   .toLowerCase()
+  //   .match(
+  //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //   );
 
-  const hash = crypto
-    .createHash("md5")
-    .update(params.email_address)
-    .digest("hex");
-  const myHeaders = new Headers();
+  // if (!isValidEmail) {
+  //   return {
+  //     statusCode: 403,
+  //     headers: genericHeaders,
+  //     body: "Please enter a valid email address.",
+  //   };
+  // }
 
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
+  // const hash = crypto
+  //   .createHash("md5")
+  //   .update(params.email_address)
+  //   .digest("hex");
+  // const myHeaders = new Headers();
 
-  try {
-    const memberDataResponse = await fetch(
-      `${process.env.MAILCHIMP_URL}/${hash}`,
-      {
-        method: "get",
-        headers: myHeaders,
-      }
-    );
+  // myHeaders.append("Content-Type", "application/json");
+  // myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
 
-    const memberData = await memberDataResponse.json();
+  // try {
+  //   const memberDataResponse = await fetch(
+  //     `${process.env.MAILCHIMP_URL}/${hash}`,
+  //     {
+  //       method: "get",
+  //       headers: myHeaders,
+  //     }
+  //   );
 
-    if (
-      (memberData && memberData.status === "pending") ||
-      memberData.status === "subscribed"
-    ) {
-      return memberData.status === "pending"
-        ? {
-            statusCode: 409,
-            headers: genericHeaders,
-            body: "Your subscription is almost complete! Please check your email and click the confirmation link.",
-          }
-        : {
-            statusCode: 409,
-            headers: genericHeaders,
-            body: "You are already subscribed to our newsletter.",
-          };
-    }
+  //   const memberData = await memberDataResponse.json();
 
-    const response = await fetch(process.env.MAILCHIMP_URL, {
-      method: "post",
-      body: JSON.stringify({
-        ...params,
-        status: "pending",
-      }),
-      headers: myHeaders,
-      redirect: "follow",
-    });
+  //   if (
+  //     (memberData && memberData.status === "pending") ||
+  //     memberData.status === "subscribed"
+  //   ) {
+  //     return memberData.status === "pending"
+  //       ? {
+  //           statusCode: 409,
+  //           headers: genericHeaders,
+  //           body: "Your subscription is almost complete! Please check your email and click the confirmation link.",
+  //         }
+  //       : {
+  //           statusCode: 409,
+  //           headers: genericHeaders,
+  //           body: "You are already subscribed to our newsletter.",
+  //         };
+  //   }
 
-    const data = await response.json();
+  //   const response = await fetch(process.env.MAILCHIMP_URL, {
+  //     method: "post",
+  //     body: JSON.stringify({
+  //       ...params,
+  //       status: "pending",
+  //     }),
+  //     headers: myHeaders,
+  //     redirect: "follow",
+  //   });
 
-    return data.status === "pending"
-      ? {
-          statusCode: 200,
-          headers: genericHeaders,
-          body: "Thank you for subscribing to our newsletter. You should receive a confirmation email soon.",
-        }
-      : genericError;
-  } catch (err) {
-    return genericError;
-  }
+  //   const data = await response.json();
+
+  //   return data.status === "pending"
+  //     ? {
+  //         statusCode: 200,
+  //         headers: genericHeaders,
+  //         body: "Thank you for subscribing to our newsletter. You should receive a confirmation email soon.",
+  //       }
+  //     : genericError;
+  // } catch (err) {
+  //   return genericError;
+  // }
 };
