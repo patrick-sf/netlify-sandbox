@@ -29,19 +29,6 @@ exports.handler = async (event) => {
 
   const params = JSON.parse(event.body);
 
-  // if (!params.hasOwnProperty("email_address")) {
-  //   return genericError;
-  // }
-
-  const re = /\S+@\S+\.\S+/;
-  if (!re.test(params.email_address)) {
-    return {
-      statusCode: 404,
-      headers: genericHeaders,
-      body: "Please enter a valid email address.",
-    };
-  }
-
   const hash = crypto
     .createHash("md5")
     .update(params.email_address)
