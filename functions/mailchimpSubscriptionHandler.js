@@ -36,7 +36,7 @@ exports.handler = async (event) => {
   const re = /\S+@\S+\.\S+/;
   if (!re.test(params.email_address)) {
     return {
-      statusCode: 403,
+      statusCode: 404,
       headers: genericHeaders,
       body: "Please enter a valid email address.",
     };
