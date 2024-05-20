@@ -39,6 +39,7 @@ exports.handler = async (event, context) => {
   myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
 
   try {
+    console.log(`fetching user: ${hash}`);
     const memberDataResponse = await fetch(
       `${process.env.MAILCHIMP_URL}/${hash}`,
       {
@@ -48,6 +49,7 @@ exports.handler = async (event, context) => {
     );
 
     const memberData = await memberDataResponse.json();
+    console.log(`fetched user: ${JSON.stringify(memberData)}`);
 
     if (
       (memberData && memberData.status === "pending") ||
@@ -66,6 +68,7 @@ exports.handler = async (event, context) => {
           };
     }
 
+    console.log(`subscribing user`);
     const response = await fetch(process.env.MAILCHIMP_URL, {
       method: "post",
       body: JSON.stringify({
@@ -77,6 +80,7 @@ exports.handler = async (event, context) => {
     });
 
     const data = await response.json();
+    console.log(`user subscribed: ${JSON.stringify(data)}`);
 
     return data.status === "pending"
       ? {
