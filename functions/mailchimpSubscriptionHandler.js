@@ -68,7 +68,12 @@ exports.handler = async (event, context) => {
           };
     }
 
-    console.log(`subscribing user`);
+    console.log(
+      `subscribing user: ${JSON.stringify({
+        ...params,
+        status: "pending",
+      })}`
+    );
     const response = await fetch(process.env.MAILCHIMP_URL, {
       method: "post",
       body: JSON.stringify({
