@@ -44,7 +44,7 @@ exports.handler = async (event, context) => {
   myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
 
   try {
-    console.log(`Fetching user: 76d1e650f9f07e81ca7906f6841393b0`);
+    console.log(`Fetching user: ${hash}`);
     const memberDataResponse = await fetch(
       `${process.env.MAILCHIMP_URL}/${hash}`,
       {
