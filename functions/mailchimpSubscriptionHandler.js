@@ -34,9 +34,12 @@ exports.handler = async (event, context) => {
 
   const params = JSON.parse(event.body);
 
+  console.log(`params.email_address type: ${typeof params.email_address}`);
+  console.log(`params.email_address length: ${params.email_address.length}`);
+
   const hash = crypto
     .createHash("md5")
-    .update(String(params.email_address))
+    .update("patrick@superformula.com")
     .digest("hex");
   const myHeaders = new Headers();
 
