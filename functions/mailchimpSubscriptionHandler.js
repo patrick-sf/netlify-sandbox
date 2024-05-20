@@ -36,7 +36,7 @@ exports.handler = async (event, context) => {
 
   const hash = crypto
     .createHash("md5")
-    .update(params.email_address)
+    .update("patrick@superformula.com")
     .digest("hex");
   const myHeaders = new Headers();
 
