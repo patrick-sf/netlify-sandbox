@@ -13,8 +13,9 @@ const genericError = {
 
 exports.handler = async (event, context) => {
   console.log(`Received request: ${event.httpMethod}`);
-  console.log(`Client headers: ${Object.keys(context.clientContext)}`);
-  console.log(`Identity headers: ${Object.keys(context.identity)}`);
+  console.log(
+    `Client headers: ${JSON.stringify(context.clientContext.custom)}`
+  );
 
   if (event.httpMethod === "OPTIONS") {
     return {
