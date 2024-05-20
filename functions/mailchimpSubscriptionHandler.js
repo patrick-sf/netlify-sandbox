@@ -34,10 +34,10 @@ exports.handler = async (event, context) => {
 
   const params = JSON.parse(event.body);
 
-  // const hash = crypto
-  //   .createHash("md5")
-  //   .update(params.email_address)
-  //   .digest("hex");
+  const hash = crypto
+    .createHash("md5")
+    .update(params.email_address)
+    .digest("hex");
   const myHeaders = new Headers();
 
   myHeaders.append("Content-Type", "application/json");
@@ -46,8 +46,7 @@ exports.handler = async (event, context) => {
   try {
     console.log(`Fetching user: 76d1e650f9f07e81ca7906f6841393b0`);
     const memberDataResponse = await fetch(
-      // `${process.env.MAILCHIMP_URL}/${hash}`,
-      `${process.env.MAILCHIMP_URL}/76d1e650f9f07e81ca7906f6841393b0`,
+      `${process.env.MAILCHIMP_URL}/${hash}`,
       {
         method: "get",
         headers: myHeaders,
