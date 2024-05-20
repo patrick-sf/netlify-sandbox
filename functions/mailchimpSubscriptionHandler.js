@@ -34,9 +34,11 @@ exports.handler = async (event, context) => {
 
   const params = JSON.parse(event.body);
 
-  console.log(`params.keys: ${Object.keys(params)}`);
-  console.log(`params.email_address type: ${typeof params.email_address}`);
-  console.log(`params.email_address length: ${params.email_address.length}`);
+  console.log(`params.keys: ${Object.keys(params.body)}`);
+  console.log(`params.email_address type: ${typeof params.body.email_address}`);
+  console.log(
+    `params.email_address length: ${params.body.email_address.length}`
+  );
 
   const hash = crypto
     .createHash("md5")
