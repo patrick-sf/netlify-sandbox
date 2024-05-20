@@ -13,7 +13,8 @@ const genericError = {
 
 exports.handler = async (event, context) => {
   console.log(`Received request: ${event.httpMethod}`);
-  console.log(`Context headers: ${Object.keys(context)}`);
+  console.log(`Client headers: ${Object.keys(clientContext)}`);
+  console.log(`Identity headers: ${Object.keys(identity)}`);
 
   if (event.httpMethod === "OPTIONS") {
     return {
@@ -32,18 +33,20 @@ exports.handler = async (event, context) => {
 
   const params = JSON.parse(event.body);
 
-  const hash = crypto
-    .createHash("md5")
-    .update(params.email_address)
-    .digest("hex");
+  // const hash = crypto
+  //   .createHash("md5")
+  //   .update(params.email_address)
+  //   .digest("hex");
   const myHeaders = new Headers();
 
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Authorization", process.env.MAILCHIMP_API_KEY);
 
   try {
+    console.log(`Fetching user: 76d1e650f9f07e81ca7906f6841393b0`);
     const memberDataResponse = await fetch(
-      `${process.env.MAILCHIMP_URL}/${hash}`,
+      // `${process.env.MAILCHIMP_URL}/${hash}`,
+      `${process.env.MAILCHIMP_URL}/76d1e650f9f07e81ca7906f6841393b0`,
       {
         method: "get",
         headers: myHeaders,
@@ -51,6 +54,7 @@ exports.handler = async (event, context) => {
     );
 
     const memberData = await memberDataResponse.json();
+    console.log(`Fetched user: ${JSON.stringify(memberData)}`);
 
     if (
       (memberData && memberData.status === "pending") ||
@@ -69,6 +73,7 @@ exports.handler = async (event, context) => {
           };
     }
 
+    console.log(`Subscribing user ${JSON.stringify(params)}`);
     const response = await fetch(process.env.MAILCHIMP_URL, {
       method: "post",
       body: JSON.stringify({
