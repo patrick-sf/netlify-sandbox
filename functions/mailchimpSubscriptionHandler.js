@@ -11,7 +11,10 @@ const genericError = {
   body: "Oops! Something went wrong. Please try subscribing again.",
 };
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
+  console.log(`Received request: ${event.httpMethod}`);
+  console.log(`Context headers: ${Object.keys(context)}`);
+
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 204,
@@ -86,6 +89,7 @@ exports.handler = async (event) => {
         }
       : genericError;
   } catch (err) {
+    console.log(`err: ${err}`);
     return genericError;
   }
 };
