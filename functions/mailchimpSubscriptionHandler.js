@@ -34,6 +34,7 @@ exports.handler = async (event, context) => {
 
   const params = JSON.parse(event.body);
 
+  console.log(`params.keys: ${Object.keys(params)}`);
   console.log(`params.email_address type: ${typeof params.email_address}`);
   console.log(`params.email_address length: ${params.email_address.length}`);
 
