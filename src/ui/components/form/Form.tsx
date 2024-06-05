@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { navigate } from 'gatsby-link'
 
 const encode = (data: { [x: string]: string | number | boolean; }) => {
   return Object.keys(data)
@@ -7,46 +8,70 @@ const encode = (data: { [x: string]: string | number | boolean; }) => {
 };
 
 export const Form = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const handleSubmit = (event: { preventDefault: () => void; target: any; }) => {
-    event.preventDefault();
+  const [state, setState] = useState({})
 
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    setState({ ...state, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
+    e.preventDefault()
+    const form = e.target
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
-        'form-name': 'contact',
-        name: name.trim(),
-        email: email,
-        message: message.trim(),
+        'form-name': form.getAttribute('name'),
+        ...state,
       }),
     })
-      .then(() => console.log('success'))
-      .catch((error) => alert(error));
-  };
+      .then(() => navigate(form.getAttribute('action')))
+      .catch((error) => alert(error))
+  }
+
   return (
     <div>
-      <form name="contact" method="POST" onSubmit={handleSubmit} netlify>
-        <input type="hidden" name="form-name" value="contact"></input>
-        <p>
-          <label htmlFor="name">Your Name: </label>
-          <input type="text" name="name" onChange={(e) => setName(e.target.value)} />
+      <h1>Contact</h1>
+      <form
+        name="contact"
+        method="post"
+        action="/thanks/"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+      >
+        {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden>
+          <label>
+            Don’t fill this out: <input name="bot-field" onChange={handleChange} />
+          </label>
         </p>
-
         <p>
-          <label htmlFor="email">Your Email: </label>
-          <input type="email" name="email" onChange={(e) => setEmail(e.target.value)} />
+          <label>
+            Your name:
+            <br />
+            <input type="text" name="name" onChange={handleChange} />
+          </label>
         </p>
-
         <p>
-          <label htmlFor="message">Message: </label>
-          <textarea name="message" onChange={(e) => setMessage(e.target.value)}></textarea>
+          <label>
+            Your email:
+            <br />
+            <input type="email" name="email" onChange={handleChange} />
+          </label>
         </p>
-
-        <button type="submit">Send</button>
+        <p>
+          <label>
+            Message:
+            <br />
+            <textarea name="message" onChange={handleChange} />
+          </label>
+        </p>
+        <p>
+          <button type="submit">Send</button>
+        </p>
       </form>
     </div>
-  );
+  )
 }
