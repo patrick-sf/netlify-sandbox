@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@fontsource/poppins": "^5.0.14",
+    "axios": "^1.7.2",
     "clsx": "^2.1.1",
     "gatsby": "^5.13.4",
     "gatsby-plugin-alias-imports": "^1.0.5",
