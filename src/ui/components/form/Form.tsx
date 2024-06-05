@@ -18,24 +18,30 @@ export const Form = () => {
   return (
     <div>
       <form name="contact" method="POST" netlify>
+        <input type="hidden" name="form-name" value="contact"></input>
         <p>
-          <label>Your Name: <input type="text" name="name" /></label>
+          <label htmlFor="name">Your Name: </label>
+          <input type="text" name="name" />
         </p>
+
         <p>
-          <label>Your Email: <input type="email" name="email" /></label>
+          <label htmlFor="email">Your Email: </label>
+          <input type="email" name="email" />
         </p>
+
         <p>
-          <label>Your Role: <select name="role[]" multiple>
+          <label htmlFor="role[]">Your Role: </label>
+          <select name="role[]" multiple>
             <option value="contractor">Contractor</option>
             <option value="subcontractor">SubContractor</option>
-          </select></label>
+          </select>
         </p>
+
         <p>
-          <label>Message: <textarea name="message"></textarea></label>
+          <label htmlFor="message">Message: </label><textarea name="message"></textarea>
         </p>
-        <p>
-          <button type="submit" onClick={handleSubmit}>Send</button>
-        </p>
+
+        <button type="submit" onClick={handleSubmit}>Send</button>
       </form>
     </div>
   );
