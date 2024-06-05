@@ -1,0 +1,11 @@
+schema: "http://localhost:8000/___graphql"
+documents: "src/**/*.tsx"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      immutableTypes: false
+      nonNullableTypes: true

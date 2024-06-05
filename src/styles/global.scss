@@ -1,0 +1,267 @@
+body {
+  font-family: 'Indivisible', sans-serif;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sora', sans-serif;
+}
+
+.font-sora {
+  font-family: 'Sora', sans-serif;
+}
+
+.font-dm-mono {
+  font-family: 'DM Mono', monospace;
+}
+
+/* Fonts
+ @TODO: Verify if we need all of them
+*/
+
+/* DM Mono Font */
+@font-face {
+  font-weight: 300;
+  font-family: 'DM Mono';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/DM-mono-font/dm-mono-latin-300-italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/DM-mono-font/dm-mono-latin-300-normal.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'DM Mono';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/DM-mono-font/dm-mono-latin-400-italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/DM-mono-font/dm-mono-latin-400-normal.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: 'DM Mono';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/DM-mono-font/dm-mono-latin-500-italic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/DM-mono-font/dm-mono-latin-500-normal.woff2) format('woff2');
+}
+
+/* Indivisible Font */
+@font-face {
+  font-weight: 900;
+  font-family: 'Indivisible';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-Black.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 900;
+  font-family: 'Indivisible';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-BlackItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Indivisible';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Indivisible';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-BoldItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: 'Indivisible';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-Light.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: 'Indivisible';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-LightItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: 'Indivisible';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-Medium.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: 'Indivisible';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-MediumItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Indivisible';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Indivisible';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-RegularItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Indivisible';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-SemiBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Indivisible';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-SemiBoldItalic.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 100;
+  font-family: 'Indivisible';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-Thin.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 100;
+  font-family: 'Indivisible';
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/Indivisible-font/Indivisible-ThinItalic.woff2) format('woff2');
+}
+
+/* Sora Font */
+@font-face {
+  font-weight: 700;
+  font-family: 'Sora';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/sora-font/Sora-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 800;
+  font-family: 'Sora';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/sora-font/Sora-ExtraBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 200;
+  font-family: 'Sora';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/sora-font/Sora-ExtraLight.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: 'Sora';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/sora-font/Sora-Light.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Sora';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/sora-font/Sora-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Sora';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/sora-font/Sora-SemiBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 100;
+  font-family: 'Sora';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/sora-font/Sora-Thin.woff2) format('woff2');
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Sora';
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/sora-font/Sora[wght].woff2) format('woff2');
+}

@@ -1,0 +1,29 @@
+/* Spacing */
+$space-xs: 4px;
+$space-s: 8px;
+$space-m: 16px; /* Default */
+$space-ml: 24px;
+$space-l: 32px;
+$space-xl: 64px;
+$space-xxl: 80px;
+$space-xxxl: 96px;
+
+/* Font weight */
+$font-weight-thin: 100;
+$font-weight-light: 300;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+
+/* Font Size */
+$font-size-s: 0.875rem;
+$font-size-default: 1em;
+$font-size-xxl: $font-size-default * 3;
+
+/* Border radiuses */
+$border-radius-small: 4px;
+$border-radius-default: 8px;
+
+/* Colors */
+$color-black: black;
+$color-white: white;
+$color-grey: #f8f8f8;

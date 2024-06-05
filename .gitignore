@@ -1,5 +1,7 @@
 .netlify
 
+.DS_Store
+
 # Logs
 logs
 *.log

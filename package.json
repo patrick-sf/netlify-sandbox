@@ -1,6 +1,64 @@
 {
+  "name": "gatsby-react-sandbox",
+  "version": "1.0.0",
+  "private": true,
+  "description": "gatsby-react-sandbox",
+  "author": "",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "dev": "npm run develop",
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext ts,tsx",
+    "lint-fix": "npm run lint -- --fix",
+    "generate-schema": "graphql-codegen --config codegen.yml"
+  },
   "dependencies": {
-    "@mailchimp/mailchimp_marketing": "^3.0.80",
-    "crypto": "^1.0.1"
+    "@fontsource/poppins": "^5.0.14",
+    "clsx": "^2.1.1",
+    "gatsby": "^5.13.4",
+    "gatsby-plugin-alias-imports": "^1.0.5",
+    "gatsby-plugin-google-gtag": "^5.13.1",
+    "gatsby-plugin-image": "^3.13.1",
+    "gatsby-plugin-sass": "^6.13.1",
+    "gatsby-plugin-sharp": "^5.13.1",
+    "gatsby-plugin-sitemap": "^6.13.1",
+    "gatsby-source-filesystem": "^5.13.1",
+    "gatsby-source-strapi": "^3.3.3",
+    "gatsby-transformer-remark": "^6.13.1",
+    "gatsby-transformer-sharp": "^5.13.1",
+    "graphql": "^16.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-player": "^2.16.0",
+    "sass": "^1.76.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.7",
+    "@graphql-codegen/typescript-operations": "^4.2.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.0",
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "gatsby-plugin-dts-css-modules": "^3.0.0",
+    "stylelint": "^16.6.1",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-order": "^6.0.4",
+    "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "gatsby": {
+      "gatsby-graphiql-explorer": "3.11.0"
+    }
   }
 }
