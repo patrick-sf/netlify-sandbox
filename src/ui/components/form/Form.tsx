@@ -9,21 +9,28 @@ const encode = (data: { [x: string]: string | number | boolean; }) => {
 
 export const Form = () => {
   const [state, setState] = useState({})
+  const [image, setImage] = useState<File | null>(null);
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
-    setState({ ...state, [e.target.name]: e.target.value })
+  const handleChange = (e: {
+    target: {
+      files: any; name: any; value: any;
+    };
+  }) => {
+    if (e.target.files) {
+      setImage(e.target.files[0]);
+    } else {
+      setState({ ...state, [e.target.name]: e.target.value })
+    }
   }
 
   const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
     e.preventDefault()
     const form = e.target
+    const formData = new FormData(form);
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({
-        'form-name': form.getAttribute('name'),
-        ...state,
-      }),
+      body: formData,
     })
       .then(() => navigate(form.getAttribute('action')))
       .catch((error) => alert(error))
