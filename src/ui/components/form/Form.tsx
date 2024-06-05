@@ -30,14 +30,6 @@ export const Form = () => {
         </p>
 
         <p>
-          <label htmlFor="role[]">Your Role: </label>
-          <select name="role[]" multiple>
-            <option value="contractor">Contractor</option>
-            <option value="subcontractor">SubContractor</option>
-          </select>
-        </p>
-
-        <p>
           <label htmlFor="message">Message: </label><textarea name="message"></textarea>
         </p>
 
