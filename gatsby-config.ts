@@ -1,4 +1,4 @@
-import type { GatsbyConfig } from 'gatsby';
+import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -11,31 +11,31 @@ const config: GatsbyConfig = {
   // @TODO: Add "gatsby-plugin-google-gtag" later and set it up
   graphqlTypegen: true,
   plugins: [
-    'gatsby-plugin-sass',
-    'gatsby-plugin-image',
-    'gatsby-plugin-sitemap',
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-dts-css-modules',
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'images',
-        path: './src/images/',
-      },
-      __key: 'images',
-    },
-    'gatsby-transformer-remark',
+    "gatsby-plugin-sass",
+    "gatsby-plugin-image",
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-dts-css-modules",
+    // {
+    //   resolve: 'gatsby-source-filesystem',
+    //   options: {
+    //     name: 'images',
+    //     path: './src/images/',
+    //   },
+    //   __key: 'images',
+    // },
+    "gatsby-transformer-remark",
     {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
         alias: {
-          '@/app': 'src/app',
-          '@/ui/templates': 'src/ui/templates',
-          '@/ui/components': 'src/ui/components',
-          '@/hooks': 'src/hooks',
+          "@/app": "src/app",
+          "@/ui/templates": "src/ui/templates",
+          "@/ui/components": "src/ui/components",
+          "@/hooks": "src/hooks",
         },
-        extensions: ['js', 'jsx', 'ts', 'tsx'],
+        extensions: ["js", "jsx", "ts", "tsx"],
       },
     },
   ],

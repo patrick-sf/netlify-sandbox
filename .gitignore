@@ -1,6 +1,7 @@
 .netlify
 
 .DS_Store
+public
 
 # Logs
 logs
