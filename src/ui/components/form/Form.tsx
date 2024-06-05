@@ -23,16 +23,33 @@ export const Form = () => {
     }
   }
 
+  // const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
+  //   e.preventDefault()
+  //   const form = e.target
+  //   fetch('/', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //     body: encode({
+  //       'form-name': form.getAttribute('name'),
+  //       ...state,
+  //     }),
+  //   })
+  //     .then(() => navigate(form.getAttribute('action')))
+  //     .catch((error) => alert(error))
+  // }
+
   const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
     e.preventDefault()
     const form = e.target
     const formData = new FormData(form);
     fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 'Content-Type': 'multipart/form-data' },
+      // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: formData,
     })
-      .then(() => navigate(form.getAttribute('action')))
+      // .then(() => navigate(form.getAttribute('action')))
+      .then(() => console.log('success'))
       .catch((error) => alert(error))
   }
 
