@@ -69,6 +69,12 @@ export const Form = () => {
           </label>
         </p>
         <p>
+          <label>
+            <span>Add file:</span>
+            <input name="file" type="file" onChange={handleChange} />
+          </label>
+        </p>
+        <p>
           <button type="submit">Send</button>
         </p>
       </form>
