@@ -47,6 +47,13 @@ export const Form = () => {
             Don’t fill this out: <input name="bot-field" onChange={handleChange} />
           </label>
         </p>
+
+        <input type="radio" name="role" value="General Contractor" onChange={handleChange} /> General Contractor
+        <input type="radio" name="role" value="supplier" onChange={handleChange} /> Supplier
+        <input type="radio" name="role" value="subcontractor" onChange={handleChange} /> Sub Contractor
+        <input type="radio" name="role" value="projectexec" onChange={handleChange} /> Project Exec
+        <input type="radio" name="role" value="other" onChange={handleChange} /> Other
+
         <p>
           <label>
             Your name:
@@ -56,9 +63,23 @@ export const Form = () => {
         </p>
         <p>
           <label>
+            Your business name:
+            <br />
+            <input type="text" name="businessname" onChange={handleChange} />
+          </label>
+        </p>
+        <p>
+          <label>
             Your email:
             <br />
             <input type="email" name="email" onChange={handleChange} />
+          </label>
+        </p>
+        <p>
+          <label>
+            Your phone number:
+            <br />
+            <input type="text" name="phonenumber" onChange={handleChange} />
           </label>
         </p>
         <p>
