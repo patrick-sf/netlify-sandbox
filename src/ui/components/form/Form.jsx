@@ -150,7 +150,12 @@ export const Form = () => {
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit} action="/thank-you/">
+      <form onSubmit={handleSubmit} 
+        name="contact"
+        method="post"
+        action="/thanks/"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field">
         <p>
           <label>
             Your Name: <input type="text" name="name" value={name} onChange={handleChange} />
