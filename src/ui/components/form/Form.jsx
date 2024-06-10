@@ -111,7 +111,7 @@ export const Form = () => {
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
-    setFile(acceptedFiles[0]);
+    setFile(acceptedFiles);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -128,7 +128,8 @@ export const Form = () => {
       "form-name": "contact",
       name: state.name,
       email: state.email,
-      message: state,
+      message: state.message,
+      phonenumber: state.phonenumber,
       file,
     };
 
@@ -251,7 +252,7 @@ export const Form = () => {
           </label>
         </p>
         <div {...getRootProps()}>
-          <input {...getInputProps()} type="file" name="file" multiple />
+          <input {...getInputProps()} type="file" name="file" multiple="true" />
           {isDragActive ? (
             <p>Drop the files here ...</p>
           ) : (
