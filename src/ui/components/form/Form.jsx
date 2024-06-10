@@ -172,7 +172,7 @@ export const Form = () => {
           </label>
         </p>
         <div {...getRootProps()}>
-          <input {...getInputProps()} />
+          <input {...getInputProps()} type="file" name="file"/>
           {
             isDragActive ?
               <p>Drop the files here ...</p> :
