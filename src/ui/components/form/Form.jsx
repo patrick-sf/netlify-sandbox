@@ -11,7 +11,6 @@ export const Form = () => {
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
-    // setFile(Object.assign({}, acceptedFiles));
     setFile(acceptedFiles[0]);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -32,7 +31,7 @@ export const Form = () => {
       email: state.email,
       message: state.message,
       phonenumber: state.phonenumber,
-      ...file,
+      file,
     };
 
     fetch("/", {
