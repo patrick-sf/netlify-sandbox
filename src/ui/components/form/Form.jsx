@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone'
+import React, { useState, useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 
 // import React, { useState } from 'react';
 // import { navigate } from 'gatsby-link'
@@ -101,83 +101,162 @@ import { useDropzone } from 'react-dropzone'
 // }
 
 export const Form = () => {
-  const [name, setName] = useState('');
-  const [status, setStatus] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [state, setState] = useState({});
+  // const [name, setName] = useState("");
+  const [status, setStatus] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [phonenumber, setPhonenumber] = useState("");
+  // const [message, setMessage] = useState("");
   const [file, setFile] = useState({});
 
-  const onDrop = useCallback(acceptedFiles => {
-    console.log(acceptedFiles)
-    setFile(acceptedFiles[0])
-  }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const onDrop = useCallback((acceptedFiles) => {
+    console.log(acceptedFiles);
+    setFile(acceptedFiles[0]);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const encode = (data) => {
     const formData = new FormData();
     Object.keys(data).forEach((k) => {
-      formData.append(k, data[k])
+      formData.append(k, data[k]);
     });
-    return formData
-  }
+    return formData;
+  };
 
-  const handleSubmit = e => {
-    const data = { "form-name": "contact", name, email, message, file }
+  const handleSubmit = (e) => {
+    const data = {
+      "form-name": "contact",
+      name: state.name,
+      email: state.email,
+      message: state,
+      file,
+    };
 
     fetch("/", {
       method: "POST",
-      // headers: { "Content-Type": 'multipart/form-data; boundary=random' },
-      body: encode(data)
+      body: encode(data),
     })
       .then(() => setStatus("Form Submission Successful!!"))
-      .catch(error => setStatus("Form Submission Failed!"));
+      .catch((error) => setStatus("Form Submission Failed!"));
 
     e.preventDefault();
   };
 
-  const handleChange = e => {
-    const { name, value } = e.target
-    if (name === 'name') {
-      return setName(value)
-    }
-    if (name === 'email') {
-      return setEmail(value)
-    }
-    if (name === 'message') {
-      return setMessage(value)
-    }
-  }
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   if (name === "name") {
+  //     return setName(value);
+  //   }
+  //   if (name === "email") {
+  //     return setEmail(value);
+  //   }
+  //   if (name === "message") {
+  //     return setMessage(value);
+  //   }
+  // };
+
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit} 
+      <form
+        onSubmit={handleSubmit}
         name="contact"
         method="post"
         action="/thanks/"
         data-netlify="true"
-        data-netlify-honeypot="bot-field">
+        data-netlify-honeypot="bot-field"
+      >
+        <p>
+          <input
+            type="radio"
+            name="role"
+            value="General Contractor"
+            onChange={handleChange}
+          />{" "}
+          General Contractor
+          <input
+            type="radio"
+            name="role"
+            value="supplier"
+            onChange={handleChange}
+          />{" "}
+          Supplier
+          <input
+            type="radio"
+            name="role"
+            value="subcontractor"
+            onChange={handleChange}
+          />{" "}
+          Sub Contractor
+          <input
+            type="radio"
+            name="role"
+            value="projectexec"
+            onChange={handleChange}
+          />{" "}
+          Project Exec
+          <input
+            type="radio"
+            name="role"
+            value="other"
+            onChange={handleChange}
+          />{" "}
+          Other
+        </p>
+
         <p>
           <label>
-            Your Name: <input type="text" name="name" value={name} onChange={handleChange} />
+            Your Name:{" "}
+            <input
+              type="text"
+              name="name"
+              value={state.name}
+              onChange={handleChange}
+            />
           </label>
         </p>
         <p>
           <label>
-            Your Email: <input type="email" name="email" value={email} onChange={handleChange} />
+            Your Email:{" "}
+            <input
+              type="email"
+              name="email"
+              value={state.email}
+              onChange={handleChange}
+            />
           </label>
         </p>
         <p>
           <label>
-            Message: <textarea name="message" value={message} onChange={handleChange} />
+            Your phone number:{" "}
+            <input
+              type="text"
+              name="phonenumber"
+              value={state.phonenumber}
+              onChange={handleChange}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            Message:{" "}
+            <textarea
+              name="message"
+              value={state.message}
+              onChange={handleChange}
+            />
           </label>
         </p>
         <div {...getRootProps()}>
-          <input {...getInputProps()} type="file" name="file" multiple/>
-          {
-            isDragActive ?
-              <p>Drop the files here ...</p> :
-              <p>Drag 'n' drop some files here, or click to select files</p>
-          }
+          <input {...getInputProps()} type="file" name="file" multiple />
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+            <p>Drag 'n' drop some files here, or click to select files</p>
+          )}
         </div>
         <p>
           <button type="submit">Send</button>
@@ -186,4 +265,4 @@ export const Form = () => {
       <h3>{status}</h3>
     </div>
   );
-}
+};
