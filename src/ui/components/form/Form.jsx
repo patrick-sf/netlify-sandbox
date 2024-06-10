@@ -111,7 +111,7 @@ export const Form = () => {
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
-    setFile(acceptedFiles);
+    setFile(acceptedFiles[0]);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
