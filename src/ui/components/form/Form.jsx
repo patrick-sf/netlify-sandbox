@@ -107,13 +107,11 @@ export const Form = () => {
   // const [email, setEmail] = useState("");
   // const [phonenumber, setPhonenumber] = useState("");
   // const [message, setMessage] = useState("");
-  const [file1, setFile1] = useState({});
-  const [file2, setFile2] = useState({});
+  const [file, setFile] = useState({});
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
-    setFile1(acceptedFiles[0]);
-    setFile2(acceptedFiles[1]);
+    setFile(acceptedFiles[0]);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -133,8 +131,7 @@ export const Form = () => {
       email: state.email,
       message: state.message,
       phonenumber: state.phonenumber,
-      file1,
-      file2,
+      file,
     };
 
     fetch("/", {
