@@ -151,7 +151,7 @@ export const Form = () => {
           ) : (
             <p>Drag 'n' drop some files here, or click to select files</p>
           )}
-          <input type="file" name="file2" />
+          <input type="file" name="file2" hidden />
         </div>
         <p>
           <button type="submit">Send</button>
