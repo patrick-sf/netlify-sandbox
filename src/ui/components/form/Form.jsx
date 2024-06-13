@@ -7,9 +7,9 @@ export const Form = () => {
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
-    acceptedFiles.forEach((file, index) =>
-      setState({ ...state, [index]: file })
-    );
+    for (i = 0; i < acceptedFiles.length; i++) {
+      setState({ ...state, [i]: file });
+    }
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
