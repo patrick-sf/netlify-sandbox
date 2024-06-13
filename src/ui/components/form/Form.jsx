@@ -4,13 +4,12 @@ import { useDropzone } from "react-dropzone";
 export const Form = () => {
   const [state, setState] = useState({});
   const [status, setStatus] = useState("");
-  const [file1, setFile1] = useState({});
-  const [file2, setFile2] = useState({});
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
-    setFile1(acceptedFiles[0]);
-    setFile2(acceptedFiles[1]);
+    acceptedFiles.forEach((file, index) =>
+      setState({ ...state, [index]: file })
+    );
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -23,15 +22,15 @@ export const Form = () => {
   };
 
   const handleSubmit = (e) => {
+    const { role, name, email, message, phonenumber, ...files } = state;
     const data = {
       "form-name": "contact",
-      role: state.role,
-      name: state.name,
-      email: state.email,
-      message: state.message,
-      phonenumber: state.phonenumber,
-      file1,
-      file2,
+      role,
+      name,
+      email,
+      message,
+      phonenumber,
+      ...files,
     };
 
     fetch("/", {
@@ -140,18 +139,16 @@ export const Form = () => {
           </label>
         </p>
         <div {...getRootProps()}>
-          <input
-            {...getInputProps()}
-            type="file"
-            name="file1"
-            multiple="true"
-          />
+          <input {...getInputProps()} type="file" name="0" multiple="true" />
           {isDragActive ? (
             <p>Drop the files here ...</p>
           ) : (
             <p>Drag 'n' drop some files here, or click to select files</p>
           )}
-          <input type="file" name="file2" hidden />
+          <input type="file" name="1" hidden />
+          <input type="file" name="2" hidden />
+          <input type="file" name="3" hidden />
+          <input type="file" name="4" hidden />
         </div>
         <p>
           <button type="submit">Send</button>
