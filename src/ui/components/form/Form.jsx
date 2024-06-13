@@ -3,14 +3,11 @@ import { useDropzone } from "react-dropzone";
 
 export const Form = () => {
   const [state, setState] = useState({});
+  const [files, setFiles] = useState({});
   const [status, setStatus] = useState("");
 
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(`state on drop: ${JSON.stringify(state)}`);
-    console.log(acceptedFiles);
-    const fileObjects = Object.assign({}, acceptedFiles);
-
-    setState({ ...state, ...fileObjects });
+    setFiles(Object.assign({}, acceptedFiles));
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -23,7 +20,7 @@ export const Form = () => {
   };
 
   const handleSubmit = (e) => {
-    const { role, name, email, message, phonenumber, ...files } = state;
+    const { role, name, email, message, phonenumber } = state;
     const data = {
       "form-name": "contact",
       role,
@@ -47,9 +44,7 @@ export const Form = () => {
   };
 
   const handleChange = (e) => {
-    console.log(`state before: ${JSON.stringify(state)}`);
     setState({ ...state, [e.target.name]: e.target.value });
-    console.log(`state after: ${JSON.stringify(state)}`);
   };
 
   return (
