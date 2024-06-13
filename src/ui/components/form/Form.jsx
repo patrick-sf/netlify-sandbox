@@ -33,6 +33,8 @@ export const Form = () => {
       ...files,
     };
 
+    console.log(`data: ${JSON.stringify(data)}`);
+
     fetch("/", {
       method: "POST",
       body: encode(data),
