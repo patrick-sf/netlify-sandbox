@@ -6,13 +6,11 @@ export const Form = () => {
   const [status, setStatus] = useState("");
 
   const onDrop = useCallback((acceptedFiles) => {
+    console.log(`state on drop: ${JSON.stringify(state)}`);
     console.log(acceptedFiles);
     const fileObjects = Object.assign({}, acceptedFiles);
 
-    setState({
-      ...state,
-      ...fileObjects,
-    });
+    setState({ ...state, ...fileObjects });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -49,9 +47,9 @@ export const Form = () => {
   };
 
   const handleChange = (e) => {
-    console.log(`state before: ${state}`);
+    console.log(`state before: ${JSON.stringify(state)}`);
     setState({ ...state, [e.target.name]: e.target.value });
-    console.log(`state after: ${state}`);
+    console.log(`state after: ${JSON.stringify(state)}`);
   };
 
   return (
