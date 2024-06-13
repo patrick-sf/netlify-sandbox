@@ -7,7 +7,7 @@ export const Form = () => {
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
-    for (i = 0; i < acceptedFiles.length; i++) {
+    for (let i = 0; i < acceptedFiles.length; i++) {
       setState({ ...state, [i]: file });
     }
   }, []);
